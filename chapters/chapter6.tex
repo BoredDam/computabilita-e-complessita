@@ -1,0 +1,94 @@
+	\chapter{Minimalizzazione}
+	Noto anche come \textbf{operatore di ricerca}.
+	
+	\section{Operazione di minimalizzazione}
+	Mediante programmi URM è possibile effettuare la ricerca del più piccolo indice tale che si verifica una certa condizione. Non trovare l'indice porta a non terminazione.
+	La \textbf{minimalizzazione} (non limitata) permette di definire una funzione $g(\vec{x})$ a partire da una funzione $f(\vec{x}, y)$ ponendo 
+	
+	$$
+	g(\vec{x}) =_{def} \text{minimo $y$ tale che } f(\vec{x},y) = 0
+	$$
+	
+	che in pseudo-codice equivale a:
+	
+		\begin{algorithm}
+		\caption{Minimalizzazione in pseudocodice}
+		\begin{algorithmic}
+			\State $y = 0$
+			\While{$f(\vec{x}), y \neq 0$} 
+				\State $y = y+1$
+			\EndWhile
+			
+			\State \Return $y$
+		\end{algorithmic}
+	\end{algorithm}
+	
+	\paragraph{Definizione} 
+	Data una funzione $f(\vec{x},y)$ (anche parziale), poniamo
+	
+	$$
+	\mu y ( f(\vec{x},y) = 0 )
+	=
+	\begin{cases}
+		\text{minimo } y \text{ tale che} \\[4pt]
+		\quad \cdot f(\vec{x},z)\downarrow \ \text{per ogni } z < y \\[4pt]
+		\quad \cdot f(\vec{x},y) = 0, 
+		\quad \text{se un siffatto } y \text{ esiste} \\[8pt]
+		\uparrow \quad \text{altrimenti}
+	\end{cases}
+	$$
+	
+	dove $\mu$ è detto operatore di minimalizzazione. L'insieme $\mathcal C_{URM}$ è chiuso rispetto alla minimalizzazione.
+	
+	\subsection{Dimostrazione della calcolabilità}
+	Vogliamo calcolare il seguente programma: $g(\vec{x}) = \mu y(f(\vec{x},z) = 0)$.
+	
+	\begin{algorithm}
+		\caption{\textit{Minimalizzazione}}
+		\begin{algorithmic}
+			\State $T(1, m+1)$
+			\State \qquad\vdots
+			\State $T(n, m+n)$
+			\State [$I_p$]:
+			\State $R_1 \leftarrow f_F(R_{m+1}, \dots, R_{m+n}, R_{m+n+1})$
+			\State $J(1, m+n+2, q)$
+			\State $S(m+n+1)$
+			\State $J(1,1,p)$
+			\State $[I_q]: \ T(m+n+1, 1)$
+		\end{algorithmic}
+	\end{algorithm}
+	
+	
+	\subsection{Corollario sulla minimalizzazione dei predicati decidibili}
+	Il minimo valore $y$ tale che il predicato $R(\vec{x}, y)$ è vero, è calcolabile, in quanto
+	
+	$$
+	\mu y (\overline{\mathrm{sign}}(C_R(\vec{x}, y) ) = 0)
+	$$
+	
+	è calcolabile.
+	
+	\subsection{Funzioni parziali da funzioni totali}
+	L'operatore di minimalizzazione, a causa della sua definizione, può derivare funzioni non totali a partire da funzioni totali! 
+	
+	\paragraph{Esempio} Se infatti la funzione $f(x,y) = |x - y^2|$ risulta essere calcolabile e totale, la funzione $g(x,y) \simeq \mu y(f(x,y) = 0)$ è calcolabile, ma non totale! Quando $x$ non è un quadrato perfetto, $\nexists y : y^2 = x \Rightarrow \nexists y = \sqrt{x}$. Quindi, la funzione calcolata a partire dalla $f$ totale e calcolabile, è
+	
+	$$
+	g(x,y) = \begin{cases}
+	\sqrt{x} & \text{se $x$ è un quadrato perfetto}\\
+	\uparrow & \text{altrimenti}
+	\end{cases}
+	$$ 
+	
+	\section{Funzioni ricorsive parziali}
+	
+	La famiglia delle \textbf{funzioni ricorsive parziali} è quella delle funzioni generate per
+	
+	\begin{itemize}
+		\item Composizione
+		\item Ricorsione primitiva
+		\item Minimalizzazione non limitata
+	\end{itemize}
+	
+	di \textbf{funzioni iniziali}. Scopriremo che questa famiglia coincide con la famiglia delle funzioni \textbf{URM-calcolabili}.
+	

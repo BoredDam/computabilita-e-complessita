@@ -1,0 +1,106 @@
+	\chapter{Composizione di programmi}
+	La prima tecnica che andremo ad approfondire, sarà la \textbf{composizione di programmi}. Per arrivare al concetto di \textbf{composizione}, dovremmo tuttavia introdurre alcuni concetti.
+	
+	
+	\section{Come concatenare programmi}
+	Siano $P$ e $Q$ due programmi (con $P$ di lunghezza $s$). Desideriamo concatenare $P$ e $Q$ in modo che $Q$ venga eseguito correttamente non appena $P$ termina. Ci sono delle osservazioni fondamentali da fare:
+	
+	\begin{enumerate}
+	\item Il programma $P$ deve fermarsi sempre al contatore di programma $s+1$.
+	\item Le istruzioni di salto di $P$ devono essere circoscritte a $P$. Lo stesso vale per $Q$. Bisognerà modificare in maniera opportuna le etichette di salto $q$ delle istruzioni $J$ nel programma $Q$.
+	\end{enumerate}
+	
+	Risolveremo ciascuno di questi problemi.
+	
+	
+	\paragraph{Programmi in forma standard - Soluzione al problema 1} Un programma $P$ si dice in forma standard se il contatore di programma si ferma sempre a $s+1$. È inoltre dimostrabile che, dato un programma $P = I_1,I_2, \dots, I_{s}$, esiste sempre un programma $P^* = I_1^*,I_2^*, \dots, I_{s}^*$ equivalente\footnote{ogni computazione è identica, a meno del contatore di programma della configurazione finale} in forma standard, tale che
+	
+	$$
+	I_j^* = \begin{cases}
+	J(m,n,s+1) & \text{se } I_j = J(m,n,q) \text{ con } q > s+1\\
+	I_j & \text{altrimenti}
+	\end{cases}
+	$$
+	
+	ed è dimostrabile per induzione. Abbiamo quindi sempre la possibilità di rendere un programma non-in forma standard, in un programma in forma standard.
+	
+	\paragraph{Correzione dei salti - Soluzione al problema 2}
+	Dato un programma $P$ indichiamo con $(P+l)$ il programma che si ottiene sostituendo in $P$ ogni istruzione $J(m,n,q)$ con $J(m,n,q+l)$, lasciando invariate le altre istruzioni. 
+	
+	\subsection{Concatenazione di programmi}
+	
+	Dati due programmi $P$ e $Q$, con $s = \text{length}(P)$, la \textbf{concatenazione} di $P$ e $Q$, scritta $PQ$, è il programma le cui prime $s$ istruzioni coincidono con quelle di $P$ e le cui successive istruzioni coincidono con quelle di $(Q+S)$.
+	Due proprietà interessanti, sono:
+	\begin{itemize}
+		\item $(PQ)R = P(QR)$, ossia la concatenazione è associativa;
+		\item Se $P$ e $Q$ sono in forma standard, anche $PQ$ è in forma standard.
+	\end{itemize}
+	
+	
+	\subsection{Problema della concatenazione}
+	La concatenazione di due programmi non equivale alla composizione delle rispettive funzioni: le aree di memoria su cui operano potrebbero sovrapporsi, portando a risultati inaspettati o perdita di dati. Andremo quindi a stabilire un modo per delimitare l'area di memoria di ciascuna delle funzioni. 
+	
+	\paragraph{Programma che isola i programmi}
+	Utilizziamo la seguente notazione $R_l \leftarrow f_P^{(n)}(R_{l_1}, \dots, R_{l_n})$ per indicare il programma che
+	
+	\begin{enumerate}
+		\item Copia il contenuto dai registri $R_{l_1}, \dots, R_{l_n}$ in $R_1, \dots, R_n$.
+		\item Cancella i registri di lavoro necessari per $P$, quelli che vanno da $(n+1)$ a $\rho(P)$. Partiamo da $(n+1)$ per non sovrascrivere quanto appena copiato.
+		\item Computa la funzione calcolata dal programma $P$.
+		\item Copia l'output di $P$ nel registro $R_l$.
+	\end{enumerate}
+	Tramite questa macro, possiamo finalmente descrivere con facilità la composizione di funzioni.
+	
+	
+	\section{Composizione di funzioni (o sostituzione)}
+	Siano $f(y_1, \dots, y_k)$ funzione calcolabili con arietà $k$, $g_1(\vec{x}), \dots, g_k(\vec{x})$ $k$ funzioni calcolabili con arietà $n$ ($\vec{x} = (x_1, \dots, x_n)$). Allora, la funzione
+	
+	$$
+	h(\vec{x})=_{def}f(g_1(\vec{x}), \dots,g_k(\vec{x})))
+	$$
+	
+	è \textbf{ottenuta per composizione} da $f,g_1,\dots,g_k$. $\lambda\vec{x}.f(g_1(\vec{x}), \dots, g_k(\vec{x}))$, ed è \textbf{calcolabile}. 
+	Si osservi che la funzione $h(\vec{x})$ è definita (ossia $h(\vec{x})\downarrow$) se e solo se
+	
+	\begin{itemize}
+		\item $g_1(\vec{x})\downarrow, \dots, g_k(\vec{x})\downarrow$
+		\item $f(g_1(\vec{x})\downarrow, \dots, g_k(\vec{x}))\downarrow$
+	\end{itemize}
+	
+	Abbiamo gli strumenti opportuni per dimostrare che l'insieme delle funzioni URM-calcolabili è chiuso rispetto alla composizione di funzioni URM-calcolabili.
+	
+	\paragraph{Dimostrazione}
+	Siano $F, G_1, \dots, G_k$ programmi \textbf{in forma standard} che calcolano rispettivamente le funzioni $f, g_1, \dots, g_k$. Sia $m = \max(\rho(G_1), \dots, \rho(G_k), k, n)$, con $\rho$ funzione che calcola il più grande indice utiizzato durante la computazione del programma passato come argomento. Oltre questo indice, la memoria è inutilizzata.
+	
+	Allora, il programma 
+\begin{algorithm}
+	\caption{\textit{Composizione di funzioni}}
+	\begin{algorithmic}
+	\State $T(1, m+1)$
+	\State $\quad \vdots$ \Comment{Copia l'input in un'area sicura}
+	\State $T(n,m+n)$
+	\State $R_{m+n+1} \gets f_{G_1}(R_{m+1}, \dots, R_{m+n})$
+	\State $\quad \vdots$ \Comment{Calcola le singole funzioni $g_1, \dots, g_k$}
+	\State $R_{m+n+k} \gets f_{G_k}(R_{m+1}, \dots, R_{m+n})$
+	\State $R_1 \gets f_{F}(R_{m+n+1}, \dots, R_{m+n+k})$ \Comment{Calcola $f$ sui valori di $g_1, \dots, g_k$ calcolati}
+	\end{algorithmic}
+\end{algorithm}
+
+calcola la funzione $h$, come volevasi dimostrare.
+
+	\section{Sostituzioni di variabili}
+	Le  seguenti sostituzioni di variabili
+	
+	\begin{itemize}
+		\item $h_1(x_1,x_2) =_{def} f(x_2,x_1)$ (permutazione)
+		\item $h_2(x) =_{def} f(x,x)$ (identificazione)
+		\item $h_3(x_1,x_2,x_3) =_{def} f(x_2,x_3)$ (introduzione di variabili "dummy", mute)
+	\end{itemize}
+	
+	generano funzioni calcolabili, e sono casi particolari del seguente corollario.
+	
+	\subsubsection{Corollario} Sia $f(y_1, \dots, y_k)$ una funzione calcolabile, e siano $x_{i_1}, x_{i_2}, \dots, x_{i_k}$ una sequenza di variabili con $i_1, \dots, i_k \in \{1, \dots, n\}$ (con possibili ripetizioni). Sia $h_x(x_1, \dots, x_n) =_{def}  f(x_{i_1}, \dots, x_{i_k})$. Allora $h$ è calcolabile. 
+	
+	\paragraph{Dimostrazione} Basta osservare che $h(\vec{x}) = f\left(\bigcup_{i_1}^n, \dots, \bigcup_{i_k}^n\right)$, con $\vec{x} = (x_1,\dots,x_n)$, è calcolabile.
+	
+	

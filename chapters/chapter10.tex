@@ -1,0 +1,160 @@
+	\chapter{Enumerazione delle funzioni calcolabili}
+	In questo capitolo andremo a trattare l'enumerabilità dei programmi, e quindi dell'insieme delle funzioni calcolabili.  
+	
+	\section{Enumerazione}
+	Un insieme infinito $X$ è enumerabile se esiste una biezione $f: X \to \mathbb{N}$. Se $f$ ed $f^{-1}$ sono anche \textbf{effettivamente calcolabili}, l'insieme $X$ si dirà \textbf{effettivamente enumerabile}.
+	
+	Nello specifico, \textbf{una enumerazione di un insieme} $X$ è una suriezione $g: \mathbb{N} \to X$, (indicata con $X = \{x_0,x_1,x_2, \dots\}$). Quando $g$ è iniettiva, diremo anche che è un'\textbf{enumerazione senza ripetizioni}. 
+	
+	\subsection{Alcuni risultati tecnici}
+	
+	I seguenti insieme sono effettivamente enumerabili:
+	
+	\begin{enumerate}
+		\item $\mathbb{N}\times\mathbb{N}$
+		\item $\mathbb{N}^+\times\mathbb{N}^+\times\mathbb{N}^+$
+		\item $\bigcup_{k>0}\mathbb{N}^k$
+	\end{enumerate}
+	
+	\paragraph{Dimostrazioni}
+	\begin{enumerate}
+		\item Consideriamo la biezione $\pi : \mathbb{N}\times\mathbb{N} \to \mathbb{N}$, definita da 
+		$$
+		\pi (m,n) =_{def} 2^m (2n + 1) -1
+		$$
+		e cui funzione inversa è data da
+		
+		$$
+		\pi^{-1}(x) = (\pi_1(x), \pi_2(x)) \qquad \text{con} \quad \pi_1(x) =_{def}(x+1), \; \pi_2(x) =_{def}\dfrac{1}{2}\left(\dfrac{x+1}{2^{\pi_1(x)}} - 1\right)
+		$$
+		
+		\item Consideriamo la biezione 
+		$$
+		\xi : \mathbb{N}^+\times\mathbb{N}^+\times\mathbb{N}^+ \to \mathbb{N} : 
+		\xi(m,n,q) =_{def} \pi(\pi(m-1,n-1), q-1)
+		$$
+		$$
+		\xi^{-1}(m,n,q) =_{def} (\pi_1(\pi_1(x)) + 1, \pi_2(\pi_1(x)) + 1, \pi_2(x) + 1)
+		$$
+		le cui funzioni sono \textbf{effettivamente calcolabili}.
+		
+		\item Si consideri la biezione $\tau : \bigcup_{k > 0} \mathbb{N}^k \to \mathbb{N}$.
+		
+		$$
+		\tau(a_1, \dots, a_k) =_{def} 2^{a_1} + 2^{a_1 + a_2 + 1} + \dots + 2^{a_1 + a_2 + \dots + a_k + k - 1}-1
+		$$
+		
+		questa è evidentemente una funzione calcolabile, ma per verificare che questa sia una biezione, andremo a sfruttare il fatto che ogni numero naturale ha una e una sola espressione binaria decimale. Noto $x$, possiamo trovare i numeri univoci $k \geq 1$ e i termini  $0 \leq b_1  < b_2 < \dots < b_k$ tale che
+		
+		$$
+		x+1 = 2^{b_1} + 2^{b_2}+ \dots + 2^{b_k}
+		$$
+		
+		dove $b_i = a_1 + \dots + a_i + i -1 \Rightarrow a_{i + 1} = b_{i+1} - b_i -1 \ \forall i: 1\leq i < k$ (e $a_1 = b_1$). La funzione $\tau^{-1}(x)$ è quindi effettivamente calcolabile, confermando la biettività effettiva.
+		
+	\end{enumerate}
+	
+	\section{Enumerabilità delle funzioni calcolabili}
+	
+	Dimostriamo passo passo l'enumerabilità dei programmi, partendo dalla consapevolezza che, un programma qualsiasi, è una sequenza finita di istruzioni. Dimostriamo che l'insieme delle istruzioni è enumerabile.
+	
+	\paragraph{Notazione}
+	\begin{itemize}
+		\item $\mathcal I$ : insieme di tutte le istruzioni URM.
+		\item $\mathcal P$ : insieme di tutti i programmi URM.
+	\end{itemize}
+	
+	\subsection{Enumerabilità delle istruzioni}
+	Dimostriamo l'enumerabilità dell'insieme delle istruzioni $\mathcal I$, definendo una biezione $\beta: \mathcal I \to \mathbb{N}$.
+	
+	\begin{itemize}
+		\item $\beta (Z(n)) = 4(n-1)$
+		\item $\beta (S(n)) = 4(n-1) + 1$
+		\item $\beta (T(m, n)) = 4\pi(m-1, n-1) + 2$
+		\item $\beta (J(m, n, q)) = 4\xi(m, n, q) + 3$
+	\end{itemize}
+	
+	la funzione inversa $\beta^{-1}(x)$, consiste nel trovare i valori $u, r : \; x = 4u + r$, con $r \in \{0,1,2,3\}$. Otteniamo quindi
+	
+	$$
+	\beta^{-1}(x) = \begin{cases}
+	Z(u+1) & \text{se } r = 0\\
+	S(u+1) & \text{se } r = 1\\
+	T(\pi_1(x) + 1, \pi_2(u) + 1) & \text{se } r = 2\\
+	J( \xi^{-1}(u)) & \text{se } r = 3\\
+	\end{cases}
+	$$
+	
+	ricordiamo che $\xi^{-1}(u) = (m,n,q)$. Esistono quindi delle funzioni calcolabili per una biezione tra $\mathcal I, \mathbb N$, rendendo $\mathcal I$ enumerabile.
+	
+	\subsection{Enumerabilità dei programmi URM}
+	Definiamo adesso una biezione $\gamma : \mathcal{P} \to \mathbb{N}$. Sia $P \in \mathcal P$. Se il programma $P = I_1,I_2,\dots,I_s$, poniamo $\gamma(P) = \tau (\beta(I_1), \beta(I_2), \dots, \beta(I_s))$. È facile verificare che $\gamma, \gamma^{-1}$ sono effettivamente calcolabili, e che quindi $\mathcal P$ è effettivamente enumerabile.
+	
+	\subsection{Numero di Gödel}
+	
+	Dato un programma $P \in \mathcal P$, $\gamma(P)$ è detto \textbf{numero di   Gödel} di $P$ (o codice di $P$). Poniamo inoltre $P_n = \gamma^{-1}(n)$.
+	
+	
+	\paragraph{Esempio di calcolo di Numero di Gödel}
+	
+	$P : T(1,3), S(4), Z(6)$. Si ha:
+	\begin{itemize}
+		\item $\beta(T(1,3)) = 4\pi(0,2) + 2 = 4(2^0(2\cdot 2 + 1) -1) + 2 = 18$
+		\item $\beta(S(4)) = 4\cdot3+1 = 13$
+		\item $\beta(Z(6)) = 4\cdot5 = 20$
+	\end{itemize}
+	$$
+	\begin{aligned}
+	\gamma(P) &= 2^{18} + 2^{18+13+1} + 2^{18+13+20+2} - 1\\
+	&= 2^{18} + 2^{32} + 2^{53} - 1\\
+	&= 262144 + 4294967296 + 9007199254740992 - 1\\
+	&= 9007203549970431
+\end{aligned}
+	$$
+	
+	
+	
+	
+	\section{Enumerabilità delle funzioni}
+	
+	Forniamo delle notazioni utili
+	\begin{itemize}
+		\item $\phi_a^{(n)}$: la funzione $n$-aria calcolata da $P_a$, ossia $f_{P_n}^{(n)}$.
+		\item $W_a^{(n)}$: il dominio di $\phi_a^{(n)}$.
+		\item $E_a^{(n)}$: l'immagine di  $\phi_a^{(n)}$.
+	\end{itemize}
+	
+	Se $f$ è una funzione \textbf{unaria calcolabile}, $f = \phi_a$ per qualche $a \in \mathbb{N}$, con $a = \gamma(P)$. Diremo che $a$ è un indice per $f$. Siccome esistono infiniti programmi che calcolano la stessa funzione, la sequenza $\alpha_0, \alpha_1, \alpha_2, \dots$ è una sequenza \textbf{con ripetizioni} che contiene tutte le funzioni unarie calcolabili. Generalizzando anche le arietà, la sequenza $\alpha_0^{(n)}, \alpha_1^{(n)}, \alpha_2^{(n)}, \dots$ è una sequenza \textbf{con ripetizioni} che contiene tutte le funzioni $n$-arie calcolabili.
+	
+	\paragraph{Teorema}
+	$C_n = \{\phi_a^{(n)}: a \in \mathbb{N}\}$, ossia l'insieme delle funzioni calcolabili, è enumerabile.
+	
+	\paragraph{Dimostrazione}
+	
+	
+	
+	\section{Diagonalizzazione di Cantor}
+	
+	Data un'enumerazione $x_0, x_1, x2$ di funzioni parziali da $\mathbb{N}$ in $\mathbb{N}$, il \textbf{metodo diagonale di Cantor} consente di costruire una funzione $x$ da $\mathbb{N}$ in $\mathbb{N}$, diversa da tutte le funzioni $x_i$ dell'enumerazione 
+	
+	$$
+	\begin{array}{c|ccccc}
+		& 0 & 1 & 2 & 3 & \cdots \\ \hline
+		\chi_0 & \chi_0(0) & \chi_0(1) & \chi_0(2) & \chi_0(3) & \cdots \\
+		\chi_1 & \chi_1(0) & \chi_1(1) & \chi_1(2) & \chi_1(3) & \cdots \\
+		\chi_2 & \chi_2(0) & \chi_2(1) & \chi_2(2) & \chi_2(3) & \cdots \\
+		\vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+	\end{array}
+	$$
+	
+	\subsection{Teorema sull'esistenza di una funzione totale, unitaria e non calcolabile}
+	
+	Esiste una funzione totale, unitaria e non calcolabile.
+	
+	$$
+	f(n)=
+	\begin{cases}
+	\phi_n(n) +1 &\text{se } \phi_n(n)\downarrow\\
+	0 &\text{se } \phi_n(n)\uparrow
+	\end{cases}
+	$$

@@ -1,0 +1,99 @@
+\chapter{Loop Program}
+	
+	I loop program sono un sottoinsieme dei programmi URM.
+	
+	\section{Istruzioni dei loop program}
+	L'istruzione di salto condizionato, viene sostituita con l'istruzione loop, che consiste in realtà in due keyword: $\mathrm{Loop}(n) , \mathrm{End}$. Somiglia un po' a un ciclo for, in quanto, sia $k$ il valore del registro $R_n$, il programma presente tra le keyword viene ripetuto $k$ volte.
+	
+	\subsection{Mappare Loop program in un programma URM}
+	
+	\begin{algorithm}
+		\caption{\textit{Loop program}}
+		\begin{algorithmic}
+		\State \textbf{Loop}(n)
+		\State \quad P
+		\State \textbf{End}
+		\end{algorithmic}
+	\end{algorithm}
+	
+	
+	\begin{algorithm}
+		\caption{\textit{Loop program in URM}}
+		\begin{algorithmic}
+			\State T(n, m*)
+			\State Z(m*+1)
+			\State $[I_p]:$
+			\State J(m* + 1, m*, q)
+			\State P
+			\State S(m*+1)
+			\State J(1, 1, p)
+		\end{algorithmic}
+	\end{algorithm}
+	
+	\section{Gerarchia dei Loop program}
+	Distinguiamo i loop program secondo il numero di cicli loop annidati. Usiamo quindi
+	\begin{itemize}
+		\item $L_0$: insieme dei loop program che presentano sole istruzioni $Z(n), S(n), T(m,n)$.
+		\item $L_{k+1}$: insieme dei loop program costituiti da $Z(n), S(n), T(m,n)$ e $Loop$ contenenti $P \in L_k$.
+	\end{itemize}
+	
+	È una notazione ricorsiva. Banalmente $L_k \subset L_{k+1}$ per $k \in \mathbb{N}$.
+	
+	\subsection{Gerarchia delle \textit{funzioni} calcolate dai Loop program}
+	Per ogni $n \geq 0$, indichiamo con $\mathcal L_n$ l'insieme delle funzioni \textbf{calcolate da programmi} in $L_n$.   
+	
+	\paragraph{Funzione di Ackermann \textit{n}-esima}
+	Osserviamo che, data $\psi_{n+1}$ funzione di Ackermann ennesima $\psi_{n+1} \in \mathcal{L}_{n+1} \backslash \mathcal{L}_{n}$.
+	
+	\section{Funzioni primitive ricorsive e i Loop Program}
+	Indichiamo con $\mathcal L = \bigcup_{n=0}^\infty \mathcal{L}_n$, ossia l'insieme di tutti i loop program.
+	Vogliamo dimostrare che
+	$$
+	\mathcal{PR} = \bigcup_{n=0}^\infty \mathcal{L}_n = \mathcal{L}
+	$$
+	
+	La dimostrazione consisterà in
+	\begin{enumerate}
+		\item Dimostrare che le funzioni iniziali appartengono a $\mathcal L_0$.
+		
+		\item Dimostrare che $\bigcup_{n=0}^\infty \mathcal{L}_n$ è chiuso rispetto a composizione e ricorsione primitiva, concludendo che $\mathcal{PR} \subseteq \bigcup_{n=0}^\infty \mathcal{L}_n$.
+		
+		\item Dimostrare $\mathcal{PR} \supseteq \bigcup_{n=0}^\infty \mathcal{L}_n$ per induzione su $n$.
+	\end{enumerate}
+	
+	\paragraph{1. Dimostrazione funzioni iniziali}
+	Le funzioni iniziali sono in $\mathcal L_0$, e coincidono con le uniche istruzioni ammesse da $\mathcal L_0$. Triviale.
+	
+	\paragraph{2.1. Dimostrazione composizione} Siano $f(y_1, \dots, y_k), g_1(\vec{x}), \dots, g_k(\vec{x}) \in \mathcal L_p$. Sia $h(\vec{x}) = f(g_1(\vec{x}), \dots g_k(\vec{x}))$. Il programma che calcola la composizione $h(\vec{x})$ è il già ben noto
+	\begin{algorithmic}
+		\State $T(1, m+1)$
+		\State $\quad \vdots$ 
+		\State $T(n,m+n)$
+		\State $R_{m+n+1} \gets f_{G_1}(R_{m+1}, \dots, R_{m+n})$
+		\State $\quad \vdots$
+		\State $R_{m+n+k} \gets f_{G_k}(R_{m+1}, \dots, R_{m+n})$
+		\State $R_1 \gets f_{F}(R_{m+n+1}, \dots, R_{m+n+k})$
+	\end{algorithmic}
+	e si trova in $\in L_p$.
+	
+	\paragraph{2.2. Dimostrazione ricorsione primitiva} Lo stesso vale per la ricorsione primitiva. Infatti, se le funzioni delle equazioni ricorsive $f(\vec{x}), g(\vec{x}, y, z) \in \mathcal L_p$, allora la funzione $h(\vec{x}, y)$ definita per ricorsione primitiva si troverà in $\mathcal L_{p+1}$.
+	
+	Di conseguenza, siano $F$ e $G$ che calcolano le funzioni $f, g$, allora $F, G \in L_p$, mentre il programma che calcola $h(\vec{x}, y)$ è in $L_{p+1}$, in quanto ottenuto da un loop che itera per $y$ volte, ovviamente calcolabile.
+	
+	Abbiamo pertanto dimostrato che $\bigcup_{n=0}^\infty \mathcal{L}_n$ è chiuso rispetto a composizione e ricorsione primitiva.
+	
+	\paragraph{3.0.1. Notazione vettoriale} Prima di dimostrare l'ultima inclusione della dimostrazione, introduciamo la seguente notazione:
+	la seguente funzione 
+	$$
+	\vec{f}: \mathbb{N}^m \to \mathbb{N}^n
+	$$
+	
+	è una funzione vettoriale che prende in input elementi di tipo $\vec{x} \in \mathbb{N}^m$, e cui output è dato da $\vec{f}(\vec{x}) = (f_1(\vec{x}), \dots, f_n(\vec{x}))$. Ciascuna delle componenti di $f$, ossia $f_i \ \forall i \in \{1,\dots, n \}$, è del tipo $f_i: \mathbb{N}^m \to \mathbb{N}$.
+	È detta anche funzione vettoriale di tipo $(m,n)$.
+	Una funzione vettoriale di tipo $(m,n)$ si dice \textbf{calcolabile} se ciascuna delle sue componenti $f_i$ è calcolabile.
+	
+	\paragraph{3.0.2. Proprietà delle funzioni vettoriali}
+	\begin{itemize}
+		\item Composizione: se due funzioni vettoriali $\vec{f}, \vec{g}$ rispettivamente di tipo $(m,n)$ ed $(n,p)$ sono primitive ricorsive, tale lo è la loro composizione $\vec{f} \circ \vec{g}$, che sarà di tipo $(m,p)$.
+	\end{itemize}
+	

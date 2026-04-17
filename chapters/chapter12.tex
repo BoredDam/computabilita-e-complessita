@@ -1,0 +1,56 @@
+	\chapter{Programmi universali}
+	
+	\section{Programma universale}
+	Si consideri la funzione $\psi(x,y) =_{def} \varphi_x(y)$. Questa funzione è universale, in quanto, ponendo $g_m(y) =_def \psi(m,y)$, la sequenza di $g_0, g_1, g_2, \dots$ contiene tutte le funzioni unarie calcolabili $\varphi_0^{(1)}, \varphi_1^{(1)}, \varphi_2^{(1)}, \dots$.
+	
+	\subsection{Calcolabilità della funzione universale}
+	Per ogni arietà $n \geq 1$, la funzione universale $\psi_U^{(n)}$ è calcolabile.
+	
+	\paragraph{Dimostrazione}
+	
+	
+	\section{Esistenza di funzione \textit{totale} calcolabile non primitiva ricorsiva}
+	Esiste una funzione \textit{totale} calcolabile non primitiva ricorsiva
+	\paragraph{Dimostrazione}
+	
+	
+	
+	
+	\section{Operazioni effettiva su funzioni calcolabili}
+	Ci chiediamo se sia possibile manipolare in maniera effettiva funzioni o insiemi infiniti (ricorsivamente enumerabili\footnote{Gli insiemi ricorsivamente enumerabili sono collezioni di elementi (solitamente numeri naturali) per i quali esiste un algoritmo capace di elencarne i membri o di riconoscere quelli validi in tempo finito}): in alcuni casi, questo è possibile, tramite applicazione del teorema di parametrizzazione!
+	
+	\subsection{Esempio 1}
+	Date $\varphi_x, \varphi_y$, calcolare un indice di $\varphi_x\varphi_y$.
+	
+	$$
+	\begin{aligned}
+		\varphi_x(z)\cdot \varphi_y(z)
+		&=
+		\psi_U(y_1,z)\cdot \psi_U(y,z) \\
+		&= \varphi^{(3)}_e(x,y,z) \\
+		&= \varphi_{S_1^2(e,x,y)}(z) \\
+		&= \varphi_{k(x,y)}(z)
+		\quad
+		\big(\text{con } k(x,y):=S_1^2(e,x,y)\ \text{totale calcolabile}\big) \\
+		&\Longrightarrow\quad
+		\varphi_x\cdot \varphi_y = \varphi_{k(x,y)}
+	\end{aligned}
+	$$
+	
+		\subsection{Esempio 2}
+		Esiste una funzione calcolabile totale $g(x)$ tale che $(\varphi_x)^2 = \varphi_{g(x)}$.
+	
+	$$
+	\begin{aligned}
+		\varphi_x(z)\cdot \varphi_y(z)
+		&=
+		\psi_U(y_1,z)\cdot \psi_U(y,z) \\
+		&= \varphi^{(3)}_e(x,y,z) \\
+		&= \varphi_{S_1^2(e,x,y)}(z) \\
+		&= \varphi_{k(x,y)}(z)
+		\quad
+		\big(\text{con } k(x,y):=S_1^2(e,x,y)\ \text{totale calcolabile}\big) \\
+		&\Longrightarrow\quad
+		\varphi_x\cdot \varphi_y = \varphi_{k(x,y)}
+	\end{aligned}
+	$$

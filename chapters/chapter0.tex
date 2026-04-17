@@ -1,0 +1,47 @@
+\chapter{Introduzione alla computabilità}
+	
+	\section{I personaggi della computabilità}
+	
+	\paragraph{Gottfried Wilhelm Von Leibniz} Tra gli inizi del 600 e la fine del 700: un grande ottimismo, che pensava il mondo fosse stato sviluppato nel modo migliore. In un epoca senza computer e tecnologia tale per svilupparli, definisce un linguaggio chiamato \textbf{Caratteristica Universale}. Si pongono le basi per la \textbf{logica del primo ordine}, il \textbf{calcolo deduttivo}. Ogni disputa si sarebbe dovuta risolvere con un calcolo! Ricordiamo il contributo di Leibniz all'analisi matematica con il concetto di \textbf{derivata} e la notazione che usiamo oggi: queste notazioni ammettevano delle automazioni! Contribui anche alla creazione di un meccanismo, noto come \textbf{ruota di Leibniz}, che estendeva l'addizionatrice di Pascal con le moltiplicazioni. Di fronte al tentativo di ricavare l'assioma delle parallele, si inizia a definire il concetto di \textbf{consistenza delle teorie}. In generale, fu il primo a mettere le basi per un \textbf{calcolo universale}. 
+	
+	\paragraph{George Boole} Algebrizza la logica proposizionale, ridefinendo il ragionamento usando connettivi logici ($\land, \lor, \lnot$).
+	
+	\paragraph{Gottlob Frege} Definito spesso come il padre della logica matematica formale. La logica di Frege usava anche molti elementi di teoria degli insiemi.
+	
+	\paragraph{William Russell} Uno dei paradossi posti a Frege, e probabilmente uno dei paradossi più grandi della storia della logica.
+	Sia $U$ l'insieme di tutti gli insiemi che non contengono se stessi. $U$ appartiene a se stesso?
+	$$
+	U = \{x : x \notin x\}; \qquad U \in U ?
+	$$
+	
+	Questo mette in crisi un'assioma della logica di Frege, noto come \textbf{assioma di appartenenza}, fin troppo potente, tale da causare il paradosso 
+	
+	$$
+	U \in U \implies U \notin U, \quad U \notin U \impliedby U \in U, \quad U \in U \Leftrightarrow U \notin U
+	$$
+	
+	\paragraph{Georg Cantor} Definisce la tecnica di \textbf{diagonalizzazione}: data una lista infinita, è possibile creare un elemento che non appartiene a questa lista, utile per alcune dimostrazioni.
+	
+	\paragraph{David Hilbert} Vanno definite le regole in maniera chiara e univoca, per creare un formalismo di logica e deduzione veramente consistente e rigoroso. La matematica è una scienza che deve consentire un modo per dimostrare in maniera esatta i propri statement: devono quindi essere definiti, dalla comunità, assiomi e regole di deduzione di ciascun sistema. Vengono quindi definiti i problemi di Hilbert, una celebre lista di 23 quesiti matematici. Non tra questi, è il problema della decidibilità.
+	
+	\paragraph{Kurt Gödel} Dimostra il \textbf{teorema di incompletezza}, secondo qui non è possibile dimostrare la consistenza della matematica con i metodi dell'artimetica (come David Hilbert sperava): alcune cose vanno date per buone! Meno cose possibili, ma qualcosa sì. Le dimostrazioni di consistenza dell'aritmetica utilizzano elementi di teoria degli ordinali\footnote{La teoria degli ordinali, sviluppata da Cantor, generalizza il concetto di posizione (primo, secondo...) agli insiemi infiniti, andando oltre i numeri naturali. Un numero ordinale è un insieme ben ordinato, dove ogni ordinale è l'insieme di tutti gli ordinali precedenti}. Il concetto di verità non può essere definito con metodi finiti. L'aritmetica non può dimostrare tutte le asserzioni: queste possono comunque essere vere!
+	
+	\paragraph{Alonzo Church} Dimostra che l'artimetica è indecidibile, introducendo un calcolo formale noto come $\lambda$-calcolo.
+	
+	\paragraph{Alan Turing} Un contemporaneo di Alonzo Church, formalizza la prima \textbf{macchina teorica universale}, nota come \textbf{Macchina di Turing}. Da lì nasce l'idea di creare un calcolatore capace di simulare tutte le altre macchine. Nasce l'\textbf{Halting Problem}, che si dimostra non risolvibile con il metodo di diagonalizzazione.
+	
+	\section{Cos'è un algoritmo?}
+	Nonostante moltissimi algoritmi siano stati applicati negli anni per risolvere problemi tipici (le 4 operazioni, problema di Euclide, crivello di Eratostene, fattorizzazione o test di divisibilità), per molto tempo \textbf{non è stato definito il concetto di algoritmo}. Un algoritmo è una procedura descritta in maniera univoca usando un formalismo opportuno. Può anche essere linguaggio naturale, ma \textbf{nulla deve essere definito in maniera ambigua} (niente \textit{"sale q.b."}).
+	
+	\subsection{Risolvere un algoritmo}
+	
+	\paragraph{Risolvere in positivo un algoritmo}
+	Significa dimostrare l'esistenza di un algoritmo. Questa coincide con l'algoritmo stesso. È sufficiente esibire l'algoritmo stesso in un formalismo coerente e univoco.
+	
+	\paragraph{Risolvere in negativo un algoritmo}
+	Significa dimostrare che tra tutti gli algoritmi possibili, nessuno risolve il problema posto.
+	La dimostrazione di non-esistenza di algoritmo deve essere necessariamente accompagnata da una definizione univoca di algoritmo tramite un opportuno \textbf{sistema di calcolo universale}. 
+	
+	\subsection{Congettura di Church-Turing}
+	Si dimostra che esiste un'equivalenza tra i vari sistemi formali definiti fino ad ora. La congettura di Church-Turing afferma che ogni sistema formale si rifà a quelli già noti. Si osserva che questa congettura può essere solo confutata, ma non dimostrata.
+	

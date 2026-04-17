@@ -1,0 +1,133 @@
+	\chapter{Altri approcci alla computabilità e tesi di Church}
+	
+	\section{Altri approcci alla computabilità}
+	
+	Il modello URM è uno dei modelli più recenti usati nello studio della calcolabilità. Tra gli approcci alla calcolabilità, questi sono alcuni dei modelli più noti:
+	\begin{itemize}
+		\item Godel - Herbrand - Kleene: funzioni ricorsive generali.
+		\item Church: $\lambda$-calcolo.
+		\item Godel - Kleene: funzioni $\mu$-ricorsive e funzioni ricorsive parziali. $\star$
+		\item Turing: funzioni calcolabili mediante macchine di Turing. $\star$
+		\item Post: funzioni definite mediante sistemi deduttivi canonici.
+		\item Sheperdson-Sturgis: funzioni URM-calcolabili. $\star$
+	\end{itemize}
+	
+	i modelli $\star$ saranno oggetti del nostro studio.
+	
+	\paragraph{Risultato della teoria della calcolabilità} Tutti i modelli precedentemente proposti caratterizzano la medesima classe di \textbf{funzioni calcolabili}, che abbiamo precedentemente denotato con $\mathcal{C}$, per cui non ha più senso dire $\mathcal{C}_\text{URM}$.
+	
+	\section{Funzioni ricorsive parziali (Godel - Kleene)}
+	La classe $\mathcal{R}$ delle \textbf{funzioni ricorsive parziali} è la più piccola delle famiglie di funzioni parziali che
+	\begin{itemize}
+		\item Contiene le funzioni iniziali $\underline 0, x+1, \bigcup_{i}^n$.
+		\item È chiusa rispetto a \textbf{composizione}, \textbf{ricorsione primitiva}, \textbf{minimalizzazione}.
+	\end{itemize}
+	
+	Godel e Kleene hanno inizialmente portato la loro attenzione sulla classe $\mathcal{R}_0$, ossia delle \textbf{funzioni $\mu$-ricorsive}, che coincide con $\mathcal{R}$ e ammette la minimalizzazione \textbf{solo se non consente funzioni parziali}.
+	
+	$$
+	\mathcal{R}_0 = \mathcal{R} \cap TOT
+	$$
+	
+	\subsection{Tutte le funzioni ricorsive parziali sono calcolabili}
+	$$
+	\mathcal{R} = \mathcal{C}_{URM}
+	$$
+	
+	\paragraph{Dimostrazione} 
+	
+	Per quanto visto in precedenza, $\mathcal{R} \subseteq \mathcal{C}_{URM}$.
+
+	Viceversa, sia $f(\vec{x})$ una funzione URM-calcolabile da un programma $P = I_1, I_2, \dots, I_s$. Senza perdere di generalità, possiamo supporre $P$ sia in forma standard, e che non ci siano istruzioni di salto che facciano passare all'istruzione subito successiva. Definiamo quindi un \textit{passo} come l'esecuzione di un'istruzione. 
+	
+	Consideriamo adesso le seguenti le seguenti funzioni relative alla computazione di $P$.
+	
+	$$
+	c(\vec{x}, t) = \begin{cases}
+	R_1 &\text{dopo $t$ passi della computazione $P(\vec{x})$ se questa non si è interrotta.}\\
+	R_1 &\text{a fine computazione, se si è interrotta.}
+	\end{cases}
+	$$
+	
+	$$
+	j(\vec{x}, t) =  \begin{cases}
+		\text{numero della prossima istruzione} &\text{dopo $t$ passi di $P(\vec{x})$ se questa non si è interrotta.}\\
+		0 &\text{se si è interrotta.}
+	\end{cases}
+	$$
+	
+	queste sono evidentemente funzioni totali. Osserviamo quindi che
+	
+	$$
+	f_P^{(n)}(\vec{x})\downarrow \Leftrightarrow \mu t (j(\vec))
+	$$
+NON STO CAPENDO NULLA
+	
+	\section{Macchine di Turing}
+	Una macchina di Turing $M$è un dispositivo finito che effettua operazioni primitive su un nastro infinito. Il nastro infinito è suddiviso in caselle che possono contenere un simbolo tratto da una lista finita di simboli, detto \textbf{alfabeto della macchina}. $s_0$ è il simbolo \textit{"blank"}, o $B$.
+	
+	$M$ può effettuare operazioni di lettura e scrittura (tramite una testina), e spostarsi a sinistra o a destra sul nastro. Ha inoltre un'unità di controllo costituita da un insieme finito di quadruple.
+	
+	\paragraph{Quadruple} Ciascuna di queste quadruple è nella forma
+	
+	$$
+	q_i \ s_j \ \alpha \ q_l
+	$$
+	
+	con $q_i$ stato della macchina, $s_j$ carattere letto, $\alpha \in \{L, R, s_0, \dots, s_k\}$ e $q_l$ nuovo stato. Ogni quadrupla definisce quindi quale azione effettuare (spostamento a sx, a dx o sovrascrittura di quale simbolo), quando la macchina legge un carattere in un determinato stato, e in quale stato transitare.
+	
+	\paragraph{Convezione sul contare} Negli usi che faremo, rappresenteremo il numero $n$ con $n$ caselle contenenti il simbolo $1$. La funzione che conta il numero di occorrenze di $1$ sul nastro è Turing-calcolabile.
+	
+	\subsection{Funzioni Turing calcolabili}
+	Una funzione parziale si dice \textbf{Turing-calcolabile} se esiste una macchina di Turing che la calcola. La famiglia delle funzioni Turing-calcolabili si indica con $\mathcal{C}_{TUR}$.
+	
+	\subsection{Equivalenza tra URM e TM}
+	Le funzioni ricorsive parziali $\mathcal R$ sono URM-calcolabili, ma anche Turing-calcolabili, ossia
+	
+	$$
+	\mathcal{C}_{URM} = \mathcal{R}= \mathcal{C}_{TUR}
+	$$
+	
+	e ciò è dimostrabile per \textbf{simulazione}.
+	
+	\newpage
+	
+	\section{Tesi di Church-Turing}
+	La tesi di Church Turing è uno dei pilastri teorici dell'informatica moderna, e ha un ruolo fondamentale nella teoria della computabilità.
+	Afferma che:
+	\begin{center}
+	\textit{La classe delle funzioni \textbf{intuitivamente} (umanamente) calcolabili coincide con la classe $\mathcal{C}_{URM}$, ossia quella delle funzioni URM-calcolabili. Lo stesso vale per le macchine di Turing, e qualsiasi altro sistema formale di computazione. È calcolabile tutto ciò che può essere calcolato da una macchina di Turing.}
+	\end{center}
+	
+	A supporto di questa tesi, abbiamo che:
+	\begin{itemize}
+		\item La tesi di Church-Turing risulta essere il teorema fondamentale della calcolabilità, in quanto tutti i sistemi di calcolabilità sembrano convergere alla stessa classe di funzioni calcolabili.
+		\item Si ha una collezione di funzioni per la quale esiste una dimostrazione di appartenenza a $\mathcal{C}_URM = \mathcal{C}_TUR = \mathcal{R}$.
+		\item La possibilità di simulare effettivamente programmi URM.
+		\item La mancanza di controesempi di funzioni effettivamente\footnote{Nella teoria della calcolabilità, un algoritmo effettivo (o procedura effettiva) è un insieme finito di istruzioni precise, non ambigue e meccaniche che, se applicato a un problema, produce una soluzione corretta in un numero finito di passi. Deve essere eseguibile da un essere umano o macchina senza intuizione, garantendo lo stesso risultato.} calcolabili ma non URM-calcolabili.
+	\end{itemize}
+	
+	\subsection{La potenza della tesi di Church-Turing}
+	Basandosi sulle prove precedentemente descritte, tutti i matematici hanno accettato la tesi di Church, la quale risulta essere uno strumento estremamente potente nelle dimostrazioni. Piuttosto che usare un modello teorico, come quello URM, o le macchine di Turing, possiamo procedere nel seguente modo.
+	
+	\paragraph{Dimostrazione della calcolabilità \textit{per tesi di Church}} Desideriamo dimostrare la calcolabilità della funzione $f$. Definiamo (in linguaggio naturale, tramite diagrammi o schemi) un algoritmo, e forniamo una dimostrazione informale ma rigorosa relativa al fatto che l'algoritmo calcola effettivamente la funzione $f$. Appelliamoci poi alla tesi di Church e concludiamo immediatamente dicendo che $f$ è URM-calcolabile. 
+	
+	\subsubsection{Estratto dal libro (che personalmente adoro) riguardo la tesi di Church-Turing}
+
+	\begin{verbatim}
+	Note that in using Church’s thesis we are not proposing to abandon all
+	thought of proof, as if Church’s thesis is a magic wand which we can wave instead. 
+	A proof by Church’s thesis will always involve proof that is
+	careful, and sometimes complicated, although informal. [...]
+	Church’s thesis not only keeps proofs shorter, but also prevents the
+	main idea of a proof or construction from being obscured by a mass of
+	technical details. It remains, however, an expression of faith or
+	confidence. The validity of faith depends on the evidence that can be
+	mustered. In the case of Church’s thesis, there is the mathematical
+	evidence already outlined. For the practised student there is the addi
+	tional evidence of his own experience in translating informal algorithms
+	into formal counterparts. For the beginner, our use of Church’s thesis in
+	subsequent chapters may call on his willingness to place confidence in the
+	ability of others until self confidence is developed.
+	\end{verbatim}
+	

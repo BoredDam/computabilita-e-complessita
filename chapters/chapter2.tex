@@ -1,0 +1,59 @@
+	\chapter{Creare funzioni computabili}
+	Tratteremo adesso una serie di metodi per combinare funzioni computabili, ottenendo altre funzioni computabili. Questo ci consentirà di dimostrare che moltissime funzioni sono computabili, senza dover scrivere un programma $P$ ogni volta, renendo meno tedioso il processo di dimostrazione della computabilità.  Prima di definire gli strumenti usati, dobbiamo dimostrare che questi sono validi.
+	
+	\section{Condizioni di esistenza di programmi}
+	Definiremo degli strumenti per capire se una funzione è calcolabile \textbf{senza dover scrivere il programma} che la calcola.
+	
+	\paragraph{Insieme delle funzioni di base} È un insieme di funzioni  notoriamente calcolabili.
+	\begin{itemize}
+		\item Funzione identicamente nulla: $\underline{0}(x) = 0$
+		\item Funzione successore: $\text {Incr}(x) = x+1$
+		\item Proiezioni: $\bigcup_{i}^n(x_1, \dots, x_n) = x_i$
+	\end{itemize}
+	
+	Ciascuna di queste funzioni di base è calcolabile, e i programmi che la calcolano sono programmi a una sola istruzione ($Z(1), S(1), T(i,1)$).
+	
+	Osservazione interessante: la funzione identità è uguale a $\bigcup_{1}^1(x_1)$, ossia $T(1,1)$.
+	\subsection{Operazioni su cui le funzioni calcolabili sono chiuse}
+	L'insieme delle funzioni calcolabili è chiuso rispetto alle seguenti operazioni.
+	
+	\paragraph{Composizione} 	Siano $f(y_1, \dots, y_k)$ funzione calcolabili con arietà $k$, $g_1(\vec{x}), \dots, g_k(\vec{x})$ $k$ funzioni calcolabili con arietà $n$ ($\vec{x} = (x_1, \dots, x_n)$). Allora, la funzione
+	
+	$$
+	h(\vec{x})=_{def}f(g_1(\vec{x}), \dots,g_k(\vec{x})))
+	$$
+	
+	è \textbf{ottenuta per composizione} da $f,g_1,\dots,g_k$. $\lambda\vec{x}.f(g_1(\vec{x}), \dots, g_k(\vec{x}))$, ed è \textbf{calcolabile}. 
+	Si osservi che la funzione $h(\vec{x})$ è definita (ossia $h(\vec{x})\downarrow$) se e solo se
+	
+	\begin{itemize}
+		\item $g_1(\vec{x})\downarrow, \dots, g_k(\vec{x})\downarrow$
+		\item $f(g_1(\vec{x})\downarrow, \dots, g_k(\vec{x}))\downarrow$
+	\end{itemize}
+	
+	\paragraph{Ricorsione primitiva}
+	Permette di costruire funzioni espresse in termini di altre funzioni. Siano $f(\vec{x}), g(\vec{x},y,z)$ funzioni assegnate, con $f$ funzione $n$-aria ($n \geq 0$). Allora:
+	\begin{itemize}
+		\item 	$h(\vec{x}, 0) = f(\vec{x})$
+		\item $h(\vec{x}, y+1) = g(\vec{x}, y, h(\vec{x}, y))$
+	\end{itemize}
+	
+	scopriremo che la ricorsione primitiva non esaurisce tutte le funzioni ricorsive.
+	
+	\paragraph{Minimalizzazione}
+	Data una funzione $f(\vec{x},y)$ (anche parziale), poniamo
+	
+	$$
+	\mu y ( f(\vec{x},y) = 0 )
+	=
+	\begin{cases}
+		\text{minimo } y \text{ tale che} \\[4pt]
+		\quad \cdot f(\vec{x},z)\downarrow \ \text{per ogni } z <y\\[4pt]
+		\quad \cdot f(\vec{x},y) = 0, 
+		\quad \text{se un siffatto } y \text{ esiste} \\[8pt]
+		\uparrow \quad \text{altrimenti}
+	\end{cases}
+	$$
+	
+	dove $\mu$ è detto operatore di minimalizzazione. A parole, ritorna il valore più piccolo di $y$ per cui, tutti i valori $z$ minori o uguali di $y$ terminano la funzione\footnote{Questa condizione, a mia opinione, un po' strana, si rifà al fatto che il programma che calcola la minimalizzazione di una funzione $f$ inizia a calcolarla dal basso verso l'alto. Se la funzione non termina per una qualsiasi $x <y$ che stiamo cercando, allora la minimalizzazione non termina.}  $f$, e tale che $f(\vec{x}, y) = 0$. Altrimenti non ritorna.
+	
