@@ -1,0 +1,52 @@
+\chapter{Decidibilità parziale}
+
+\section{Predicati parzialmenti decidibili}
+
+Sebbene la funzione caratteristica del predicato "$x \in W_x$" non sia calcolabile, la seguente funzione, nota come \textbf{funzione caratteristica parziale}
+
+$$
+\alpha(x) = \begin{cases}
+1 &\text{se } x \in W_x\\
+\uparrow &\text{se } x \notin W_x\\
+\end{cases}
+= \underline{1}(\psi_U(x,x))
+$$
+
+è calcolabile per la tesi di Church, oppure osservando che $f(x) = \underline{1}(\psi_U(x,x))$. Chiameremo questa una \textbf{procedura di semi-decisione} per "$x \in W_x$".
+
+\subsection{Alcuni predicati \textit{parzialmente} decidibili}
+
+\paragraph{Ogni decidibilità totale è anche parziale} 
+
+\paragraph{Il problema della fermata è parzialmente decidibile} In quanto la sua funzione caratteristica parziale è calcolabile.
+
+\paragraph{Appartenenza al dominio} Se $g(\vec{x})$ è una funzione calcolabile, il predicato "$\vec{x} \in \mathrm{Dom}(y)$" è parzialmente decidibile. La sua funzione caratteristica parziale soddisfa la relazione $f(\vec{x}) = \underline{1}(g(\vec{x}))$.
+
+\paragraph{NON È parzialmente decidibile} Il problema "$x \notin W_x$" non è parzialmente decidibile. Se $f$ fosse la sua funzione caratteristica parziale $x \in \mathrm{Dom}(f) \Leftrightarrow x \notin W_x$, per cui $\mathrm{Dom}(f) \neq W_x$ per ogni $x \in \mathbb{N}$, e quindi $f$ non può essere calcolabile.
+
+\section{Due caratterizzazioni dei predicati parzialmente decidibili}
+
+\subsection{Teorema 1}
+Un predicato $M(\vec{x})$ è parzialmente decidibile se e solo se esiste una funzione calcolabile $g(\vec{x})$ tale che: $M(\vec{x}) \Leftrightarrow \vec{x} \in \mathrm{Dom}(g)$.
+
+\paragraph{Dimostrazione} Se $M(\vec{x})$ è parzialmente decidibile, la sua funzione caratteristica parziale è calcolabile...
+
+\subsection{Teorema 2} Un predicato $M(\vec{x})$ è parzialmente decidibile se e solo se esiste un predicato decidibile $R(\vec{x},y)$ tale che $M(\vec{x}) \Leftrightarrow \exists yR(\vec{x},y)$.
+
+\subsection{Altre proprietà}
+
+\paragraph{Chiusura rispetto alla quantificazione esistenziale}
+Se il predicato $M(\vec{x}, y)$ è parzialmente decidibile, tale è anche il predicato $(\exists y) M(\vec{x}, y)$. La parziale decidibilità è chiusa rispetto alla quantificazione universale.
+
+\paragraph{Corollario}
+
+Se $M(\vec{x}, y_1, \dots, y_m)$ è parzialmente decidibile, è parzialmente decidibile anche il predicato $(\exists y_1)\dots(\exists y_m) M (\vec{x}, y_1, \dots, y_m)$.
+
+
+\subsection{Decidibilità totale da decidibilità parziale}
+
+Un predicato $M(\vec{x})$ è decidibile se e solo se sono parzialmente decidibili il predicato $M(\vec{x})$ e la sua negazione $\lnot M(\vec{x})$.
+
+\paragraph{Dimostrazione informale con tesi di Church} Eseguiamo in parallelo entrambi i predicati, un passo alla volta.
+
+\paragraph{Dimostrazione formale} Pagina 47.
