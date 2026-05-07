@@ -1,0 +1,96 @@
+\chapter{Introduzione alla complessità}
+
+\section{Notazioni asintotiche}
+
+Le notazioni asintotiche permettono di confrontare la crescita delle funzioni per valori sufficientemente grandi dell'argomento $n$. Permette di nascondere eventuali valori costanti, e in generale, termini di ordine inferiore. Descrive il comportamento al limite, non per valori piccoli.
+
+\paragraph{Notazione O-grande}
+La notazione
+
+$$
+f = \mathcal{O}(g)
+$$
+%
+indica che esistono $c \in ]0, + \infty[$ e $\nu \in N$ tali che
+
+$$
+0 \leq f(n) \leq c \cdot g(n) \qquad \forall n \geq \nu
+$$
+
+\paragraph{Notazione Omega-grande}
+La notazione
+
+$$
+f = \Omega(g)
+$$
+%
+indica che esistono $c \in ]0, + \infty[$ e $\nu \in N$ tali che
+
+$$
+0 \leq c \cdot g(n) \leq f(n) \qquad \forall n \geq \nu
+$$
+
+\paragraph{Notazione Theta-grande}
+La notazione
+
+$$
+f = \Theta(g)
+$$
+%
+indica che $f = \Omega(g) = \mathcal{O}(g)$.
+
+
+
+\section{Macchine di Turing nel modulo complessità}
+
+Una macchina di Turing è un dispositivo computazionale astratto costituito da un nastro infinito, una testina meccanica, un sistema di controllo e un insieme \textbf{finito} di istruzioni.
+
+\paragraph{Nastro: finito o infinito?}
+Vogliamo trovare un espediente per rappresentare un nastro infinito in maniera finita. Il nastro della macchina di Turing, in un fascino simile alle macchine URM, utilizzerà sempre un numero finito di caselle, e utilizzeremo una restrizione del nastro \textit{teoricamente infinito} tra gli estremi delle caselle usate, delimitata tramite barriere. Quando la testina supera le barriere  queste si muovono del minimo necessario (a sinistra o a destra). In questo modo, il nastro è virtualmente infinito, ma nel pratico finito ma con margine di crescita sui versi del nastro.
+
+\paragraph{Il sistema di controllo}
+In ogni istante, il comportamento della macchina dipende dallo \textbf{stato attivo} e dal \textbf{simbolo letto} dalla testina. Chiameremo questo \textbf{stato del sistema di controllo}.
+
+\paragraph{Configurazione istantanea}
+Questo, contiene al suo interno il contenuto del nastro, la posizione della testina e lo stato attivo del sistema di controllo.
+
+\paragraph{Azioni della macchina di Turing}
+Ogni azione avviene in maniera atomica assieme alla lettura subito precedente, e possono consistere in:
+\begin{itemize}
+	\item Modifica di un simbolo su una casella.
+	\item Cancellazione della casella (scrittura del simbolo \textit{blank}).
+	\item Spostamento a sinistra.
+	\item Spostamento a destra.
+\end{itemize}
+
+La macchina consulta le istruzioni da effettuare consultando lo stato attivo $q$ e il simbolo letto dalla testina $t$, quindi consultando la coppia $(q,t)$.
+
+\paragraph{Configurazione iniziale} È rappresentata da una sequenza di simboli dell'alfabeto senza simboli \textit{blank} in mezzo. È la condizione di partenza del nastro. La testina inizia sempre sulla casella più a sinistra del nastro. Il sistema di controllo si trova nello stato $q_0$.
+
+\paragraph{Computazione} In una macchina di Turing, una computazione consiste in una successione di passi. In ognuno di questi passi, la macchina
+
+\begin{enumerate}
+	\item Legge il simbolo 
+	\item Consulta il programma
+	\item Esegue l'azione determinata
+	\item Passa alla prossima configurazione
+\end{enumerate}
+
+\paragraph{Configurazione terminale} La macchina si arresta se raggiunge una configurazione terminale, ossia su cui non è definita un'azione per la coppia $(q,t)$.
+
+\paragraph{Output}
+L'output della macchina di Turing è la stringa ottenuta concatenando i simboli contenuti nelle caselle dalla casella scandita, verso destra, fino alla prima casella immediatamente seguita da una casella vuota. Quando la casella scandita è vuota, la stringa di output è $\epsilon$.
+
+
+\subsection{Formalizzare le macchine di Turing}
+
+\paragraph{Insiemi di simboli importanti}
+Fissiamo degli insiemi di simboli utili a definire le macchine di Turing.
+\begin{itemize}
+	\item $Q$ insieme dei simboli di stato
+	\item $S$ insieme dei simboli di nastro
+	\item $\square$ simbolo di blank
+	\item Simboli di spostamento $\leftarrow, \ \rightarrow$
+\end{itemize}
+
+

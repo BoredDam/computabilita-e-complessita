@@ -115,7 +115,7 @@
 	
 	
 	
-	\section{Enumerabilità delle funzioni}
+	\section{Enumerabilità delle funzioni calcolabili}
 	
 	Forniamo delle notazioni utili
 	\begin{itemize}
@@ -124,13 +124,25 @@
 		\item $E_a^{(n)}$: l'immagine di  $\phi_a^{(n)}$.
 	\end{itemize}
 	
-	Se $f$ è una funzione \textbf{unaria calcolabile}, $f = \phi_a$ per qualche $a \in \mathbb{N}$, con $a = \gamma(P)$. Diremo che $a$ è un indice per $f$. Siccome esistono infiniti programmi che calcolano la stessa funzione, la sequenza $\alpha_0, \alpha_1, \alpha_2, \dots$ è una sequenza \textbf{con ripetizioni} che contiene tutte le funzioni unarie calcolabili. Generalizzando anche le arietà, la sequenza $\alpha_0^{(n)}, \alpha_1^{(n)}, \alpha_2^{(n)}, \dots$ è una sequenza \textbf{con ripetizioni} che contiene tutte le funzioni $n$-arie calcolabili.
+	Se $f$ è una funzione \textbf{unaria calcolabile}, $f = \phi_a$ per qualche $a \in \mathbb{N}$, con $a = \gamma(P)$. Diremo che $a$ è un indice per $f$. Siccome esistono infiniti programmi che calcolano la stessa funzione, la sequenza $\phi_0, \phi_1, \phi_2, \dots$ è una sequenza \textbf{con ripetizioni} che contiene tutte le funzioni unarie calcolabili. Generalizzando anche le arietà, la sequenza $\phi_0^{(n)}, \phi_1^{(n)}, \phi_2^{(n)}, \dots$ è una sequenza \textbf{con ripetizioni} che contiene tutte le funzioni $n$-arie calcolabili.
 	
-	\paragraph{Teorema}
-	$C_n = \{\phi_a^{(n)}: a \in \mathbb{N}\}$, ossia l'insieme delle funzioni calcolabili, è enumerabile.
+	\subsection{Enumerabilità funzioni calcolabili \textit{n}-arie}
+	$\mathcal C_n = \{\phi_a^{(n)}: a \in \mathbb{N}\}$, ossia l'insieme delle funzioni $n$-arie calcolabili, è enumerabile.
+	%
+	A partire dalla sequenza di funzioni calcolabili $n$-arie $\phi_0^{(n)}, \phi_1^{(n)}, \phi_2^{(n)}, ...$ con ripetizioni, possiamo creare una sequenza senza ripetizioni definita secondo
 	
-	\paragraph{Dimostrazione}
+	$$
+	\begin{cases}
+		f(0) = 0, \\
+		f(m+1) = \mu z (\phi_z^{(n)} \neq \phi_{f(0)}^{(n)},  \dots, \phi_{f(m)}^{(n)}).
+	\end{cases}
+	$$
+	%
+	Esiste quindi una biezione con $\mathbb{N}$.
 	
+	
+	\subsection{Enumerabilità di tutte le funzioni calcolabili}
+	$\mathcal C = \bigcup_{n \geq 1} \mathcal C_n$. Essendo ciascun $\mathcal C_n$ enumerabile, allora $\mathcal{C}$ è enumerabile
 	
 	
 	\section{Diagonalizzazione di Cantor}
@@ -150,7 +162,7 @@
 	
 	essendo però tutte le funzioni calcolabili enumerabili, la funzione $\chi^*$ risulterà non calcolabile. Basterà definire $\chi^*(i) \neq \chi_i(i) \ \forall i \in \mathbb N$.
 	
-	\subsection{Teorema sull'esistenza di una funzione totale, unitaria e non calcolabile}
+	\subsection{Teorema sull'esistenza di una funzione totale, unaria e non calcolabile}
 	
 	Esiste una funzione totale, unitaria e non calcolabile.
 	
