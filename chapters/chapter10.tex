@@ -173,3 +173,60 @@
 	0 &\text{se } \phi_n(n)\uparrow
 	\end{cases}
 	$$
+	
+	\newpage
+	
+	\section{Teorema \textit{s-m-n }o di parametrizzazione}
+	Introduciamo il teorema di parametrizzazione dal generale al particolare.
+	
+	\paragraph{Concetto: specializzazione di funzione}
+	Il concetto è prendere una funzione $f(\vec{x}, \vec{y})$ $n+m$-aria, e crearne una specializzazione $f(\vec{y})$ $m$-aria su dei valori fissati di $\vec{x}$.
+	
+	\paragraph{Spiegazione intuitiva}
+	Sia $f(x,y)$ una funzione calcolabile. Dato $a \in \mathbb{N}$, poniamo 
+	
+	$$
+	f_a(y) =_{def} f(a,y) \qquad \left[ f(x,a) = \phi_{e_x} (y)\right]
+	$$
+	%
+	$f_a$ è calcolabile, quindi $f_a = \phi_{e_a}$ per qualche $e_a$. La funzione $a \to e_a$ è totale, ma questo non significa sia sempre calcolabile. Il teorema di parametrizzazione asserisce che esiste una funzione \textbf{calcolabile} e \textbf{totale} $k$, che mappa $x \to k(x) = e_x$, ossia:
+	
+	$$
+	k:  f_x = \phi_{k(x)}.
+	$$
+	
+	
+	\subsection{Teorema \textit{s-m-n } in forma semplice}
+	Sia $f(x,y)$ una funzione calcolabile. Allora esiste una funzione totale calcolabile $k(x)$ tale che $f(x,y) = \phi_{k(x)}(y)$.
+	
+	\paragraph{Dimostrazione} Sia $F$ il programma URM che calcola la funzione $f$. Basta esibire un programma URM $Q_a$ che calcoli $f_a$ per ogni valore di $a$. 
+	
+	\begin{algorithm}
+		\caption{$Q_a$}
+		\begin{algorithmic}
+			\State $T(1,2)$
+			\State $Z(1)$
+			\State $S(1)$
+			\State $\quad \vdots$ \text{ per $a$ volte.}
+			\State $S(1)$
+			\State $F$
+		\end{algorithmic}
+	\end{algorithm}
+	
+	Ora, $f(a,y)$ è calcolata da $Q_a$. Poniamo $k(x) = \text{codice del programma } Q_x$, ossia il numero di Godel $\gamma(Q_x)$. Esistendo una procedura univoca per calcolare il codice dato un programma, $k(x)$ è totale ($\mathcal{PR}$) ed effettivamente calcolabile, quindi calcolabile, e per costruzione, vale che
+	
+	$$
+	f(x,y) = \phi_{k(x)}(y).
+	$$
+	
+	\subsection{Teorema \textit{s-m-n }}
+	Nella versione più generale, il teorema $s-m-n$ dice che esiste una procedura effettiva che permette di calcolare il codice (numero di Godel) di una versione specializzata (con argomenti fissati) di un programma con codice noto. Più formalmente, diremo che: $\forall m, n \geq 1$ esiste una funzione totale calcolabile $(m+1)$-aria $s^m_n(e, \vec{x})$ tale che
+	
+	$$
+	\phi_{s(e,x_1,\dots,x_m)}(y_1,\dots,y_n)
+	=
+	\phi_e(x_1,\dots,x_m,y_1,\dots,y_n).
+	$$
+
+$e$ è il codice del programma ``vecchio'', $\vec{x} = x_1, \dots, x_m$ è l'input su cui specializzarlo, e la funzione $s$ calcola il nuovo numero di Godel. La funzione a destra è una funzione $(m+n)$-aria, mentre quella a sinistra è una funzione $n$-aria
+	

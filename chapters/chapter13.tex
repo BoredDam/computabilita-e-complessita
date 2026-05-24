@@ -1,6 +1,102 @@
-\chapter{???}
-	
-	\section{Problemi indecidibili della teoria della calcolabilità}
-	
-	\subsection{Halting problem}
-	Il problema "$x \in W_x$" è indecidibile. Si dimostra verificando che la funzione 
+\chapter{Decidibilità, indecidibilità e parziale decidibilità}
+
+\section{Predicati indecidibili}
+Un predicato $M(\vec{x})$ si dice \textbf{decidibile} se la sua funzione caratteristica
+$$
+C_M(\vec{x}) = \begin{cases}
+1 &\text{se $M(\vec{x})$ vale}\\
+0 &\text{se $M(\vec{x})$ non vale} 
+\end{cases}
+$$
+%
+è calcolabile. Così non fosse, si direbbe indecidibile. Denominiamo l'algoritmo che calcola $c_M$ \textbf{procedura di decisione} del predicato $M(\vec{x})$. 
+
+Altri modi per indicare che un predicato è decidibile, sono:
+\it ricorsivo, ricorsivamente decidibile, risolvibile, ricorsivamente risolvibile, calcolabile, ha il problema della decisione ricorsivo\rm.
+
+\section{Problemi indecidibili della teoria della calcolabilità}
+\subsection{Appartenenza al dominio}
+Il problema $x \in W_x$ è indecidibile, assieme a tutte le sue formulazioni equivalenti, come
+
+$$
+\phi_x(x)\downarrow,\quad P_x(x)\downarrow,\quad \psi_U(x,x)\downarrow
+$$
+
+\paragraph{Dimostrazione}
+Dobbiamo dimostrare che la funzione
+
+$$
+f(x) = \begin{cases}
+	1 &\text{se $x \in W_x$}\\
+	0 &\text{se $x \notin W_x$} 
+\end{cases}
+$$
+%
+non è calcolabile. Procediamo per assurdo facendo vedere che se $f$ fosse calcolabile, riusciremo a costruire una $g$ diversa da tutte le funzioni calcolabili.
+
+Supponiamo $f$ sia calcolabile, e definiamo
+
+$$
+g(x)
+= \begin{cases}
+	0 &\text{se $x \notin W_x$}\\
+	\uparrow &\text{se $x \in W_x$}\\
+\end{cases}
+= \begin{cases}
+	0 &\text{se $f(x) = 0$}\\
+	\uparrow &\text{se $f(x) = 1$}\\
+\end{cases}
+$$
+
+essendo una definizione per casi, questa deve essere calcolabile (imponendo che $f(x)$ sia calclabile, per ipotesi). Di contro, osserviamo che $x \in Dom(g) \Leftrightarrow x \notin W_x \ \forall x \in \mathbb{N}$, e quindi $Dom(g) \neq W_x \ \forall x \in \mathbb{N}$. $g$ è quindi diversa da tutte le funzioni calcolabili.
+
+\subsection{Appartenenza al dominio e al range di \textit{h}}
+Esiste una funzione calcolabile $h$ tale che i problemi $x \in Dom(h)$ e $x \in Ran(h)$ sono entrambi indecidibili.
+
+\paragraph{Dimostrazione}
+
+Si ponga
+$$
+g(x)
+= \begin{cases}
+	x &\text{se $x \in W_x$}\\
+	\uparrow &\text{se $x \notin W_x$}\\
+\end{cases}
+$$
+%
+è una definizione per casi apparentemente calcolabile ($h(x) = x \cdot \underline 1 (\psi_U(x,x))$). Però, per ogni $x$ si ha 
+
+$$
+x \in Dom(h) \Leftrightarrow x \in W_x \Leftrightarrow x \in Ran(h)
+$$
+
+\subsection{Halting problem}
+Il rinomato problema della fermata ``$\phi_x(y)\downarrow$'' è indecidibile. Lo dimostriamo usando una tecnica nota come \textbf{riduzione}. Informalmente, il problema $\phi_x(x)\downarrow$ è più facile del problema $\phi_x(y)\downarrow$. Poiché il primo è indecidibile, ne segue che anche il secondo lo è. Più formalmente, sia
+
+$$
+g(x,y)
+= \begin{cases}
+	x &\text{se $\phi_x(y)\downarrow$}\\
+	\uparrow &\text{se $\phi_x(y)\uparrow$}\\
+\end{cases}
+$$
+%
+ora, se questa funzione $g$ fosse calcolabile, lo sarebbe anche il caso particolare $f(x) = g(x,x)$, ma questa sarebbe la funzione caratteristica del problema $\phi_x(x)\downarrow$ che è non calcolabile, pertanto $g$ non è calcolabile.
+
+\subsubsection{Tecnica della riduzione}
+Supponiamo di avere due problemi $M_1(\vec{x}),\, M_2(y_1, \dots, y_n)$. Diremo che $M_1$ è \textbf{riducibile} a $M_2$ se esistono funzioni totali calcolabili $k_1(\vec{x}), \dots, k_n(\vec{x})$ tali che 
+
+$$
+M_1(\vec{x}) \Leftrightarrow M_2(k_1(\vec{x}), \dots, k_n(\vec{x})) \ \forall \vec{x}
+$$
+%
+Se $M_1$ è riducibile a $M_2$, ogni procedura di decisione per $M_2$ da luogo ad una procedura di decisione per $M_1$, per cui, se $M_1$ è indecidibile, anche $M_2$ dovrà essere indecidibile. Il teorema $s-m-n$ serve proprio a ridurre un problema a un altro.
+
+\subsection{Indecidibilità di $\phi_x = \underline0$}
+
+Desideriamo che
+$$
+x \in W_x \Leftrightarrow \phi_{k(x)} = \underline0
+$$
+
+Con

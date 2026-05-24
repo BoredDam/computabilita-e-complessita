@@ -1,13 +1,33 @@
 	\chapter{Programmi universali}
 	
 	\section{Programma universale}
-	Si consideri la funzione $\psi(x,y) =_{def} \varphi_x(y)$. Questa funzione è universale, in quanto, ponendo $g_m(y) =_def \psi(m,y)$, la sequenza di $g_0, g_1, g_2, \dots$ contiene tutte le funzioni unarie calcolabili $\varphi_0^{(1)}, \varphi_1^{(1)}, \varphi_2^{(1)}, \dots$.
+	Si consideri la funzione $\psi(x,y) =_{def} \phi_x(y)$. Questa funzione è universale, in quanto, ponendo $g_m(y) =_{def} \psi(m,y)$, la sequenza di $g_0, g_1, g_2, \dots$ contiene tutte le funzioni unarie calcolabili $\phi_0^{(1)}, \phi_1^{(1)}, \phi_2^{(1)}, \dots$.
+	In notazione lambda:
+	\begin{equation}
+	\begin{aligned}
+	g_m &= \lambda y.\psi(m,y)\\
+	&= \lambda y.\phi_m(y)\\
+	&= \phi_m
+	\end{aligned}
+	\end{equation}
 	
 	\subsection{Calcolabilità della funzione universale}
-	Per ogni arietà $n \geq 1$, la funzione universale $\psi_U^{(n)}$ è calcolabile.
+	La funzione universale per le funzioni $n$-arie calcolabili è una funzione $(n+1)$-aria $\psi_U^{(n)}$ calcolabile $\forall n \geq 1$, ed è definita da:
 	
-	\paragraph{Dimostrazione}
+	\begin{equation}
+	\psi_U^{(n)}(e, x_1, \dots, x_n) = \phi_e^{(n)}(x_1, \dots, x_n)
+	\end{equation}
 	
+	\paragraph{Dimostrazione informale della calcolabilità}
+	Fissiamo $n \geq 1$. Dati un indice $e$ e una $n$-upla $\vec{x} = x_1, \dots, x_n$, possiamo calcolare $\phi_U^{(n)}(e, \vec{x})$ nel seguente modo:
+	\begin{enumerate}
+		\item Si costruisca il programma $P_e$
+		\item Si simuli $P_e$ sull'input $\vec{x}$
+	\end{enumerate}
+	%
+	Essendo	la procedura precedente una procedura univoca e ben definita,  $\phi_U^{(n)}$ è calcolabile per la tesi di Church.
+	
+	\paragraph{Dimostrazione formale della calcolabilità}
 	
 	\section{Esistenza di funzione \textit{totale} calcolabile non primitiva ricorsiva}
 	Esiste una funzione \textit{totale} calcolabile non primitiva ricorsiva
@@ -20,37 +40,37 @@
 	Ci chiediamo se sia possibile manipolare in maniera effettiva funzioni o insiemi infiniti (ricorsivamente enumerabili\footnote{Gli insiemi ricorsivamente enumerabili sono collezioni di elementi (solitamente numeri naturali) per i quali esiste un algoritmo capace di elencarne i membri o di riconoscere quelli validi in tempo finito}): in alcuni casi, questo è possibile, tramite applicazione del teorema di parametrizzazione!
 	
 	\subsection{Esempio 1}
-	Date $\varphi_x, \varphi_y$, calcolare un indice di $\varphi_x\varphi_y$.
+	Date $\phi_x, \phi_y$, calcolare un indice di $\phi_x\phi_y$.
 	
 	$$
 	\begin{aligned}
-		\varphi_x(z)\cdot \varphi_y(z)
+		\phi_x(z)\cdot \phi_y(z)
 		&=
 		\psi_U(y_1,z)\cdot \psi_U(y,z) \\
-		&= \varphi^{(3)}_e(x,y,z) \\
-		&= \varphi_{S_1^2(e,x,y)}(z) \\
-		&= \varphi_{k(x,y)}(z)
+		&= \phi^{(3)}_e(x,y,z) \\
+		&= \phi_{S_1^2(e,x,y)}(z) \\
+		&= \phi_{k(x,y)}(z)
 		\quad
 		\big(\text{con } k(x,y):=S_1^2(e,x,y)\ \text{totale calcolabile}\big) \\
 		&\Longrightarrow\quad
-		\varphi_x\cdot \varphi_y = \varphi_{k(x,y)}
+		\phi_x\cdot \phi_y = \phi_{k(x,y)}
 	\end{aligned}
 	$$
 	
 		\subsection{Esempio 2}
-		Esiste una funzione calcolabile totale $g(x)$ tale che $(\varphi_x)^2 = \varphi_{g(x)}$.
+		Esiste una funzione calcolabile totale $g(x)$ tale che $(\phi_x)^2 = \phi_{g(x)}$.
 	
 	$$
 	\begin{aligned}
-		\varphi_x(z)\cdot \varphi_y(z)
+		\phi_x(z)\cdot \phi_y(z)
 		&=
 		\psi_U(y_1,z)\cdot \psi_U(y,z) \\
-		&= \varphi^{(3)}_e(x,y,z) \\
-		&= \varphi_{S_1^2(e,x,y)}(z) \\
-		&= \varphi_{k(x,y)}(z)
+		&= \phi^{(3)}_e(x,y,z) \\
+		&= \phi_{S_1^2(e,x,y)}(z) \\
+		&= \phi_{k(x,y)}(z)
 		\quad
 		\big(\text{con } k(x,y):=S_1^2(e,x,y)\ \text{totale calcolabile}\big) \\
 		&\Longrightarrow\quad
-		\varphi_x\cdot \varphi_y = \varphi_{k(x,y)}
+		\phi_x\cdot \phi_y = \phi_{k(x,y)}
 	\end{aligned}
 	$$
