@@ -1,0 +1,90 @@
+\chapter{Macchine di Turing multi-nastro}
+
+\section{Introduzione}
+Le macchine di Turing multi-nastro presentano due o più nastri. Ogni nastro ha
+
+\begin{itemize}
+	\item Una propria sequenza di caselle
+	\item Una propria testina meccanica
+	\item Un proprio simbolo scandito
+\end{itemize}
+%
+Le testine si muovono in maniera indipendente, ma sono comandate da un unico sistema di controllo. A ogni passo, la macchina esegue simultaneamente le operazioni su tutti i nastri.
+
+\subsection{Istruzioni}
+
+Le istruzioni in una macchina di Turing con $k$ nastri sono rappresentate nel seguente modo:
+
+$$
+(q, (t_1, \dots, t_k), (o_1, \dots, o_k), p)
+$$
+%
+Quindi, un'azione su una macchina multi-nastro, consiste nell'esecuzione in parallelo sui $k$ nastri delle operazioni $(o_1, \dots, o_k)$ e nella transizione $q\to p$.
+
+\subsection{Configurazione iniziale}
+Per un dato input
+
+$$
+Z = s_{i_1} \dots s_{i_n}
+$$
+%
+la configurazione iniziale è definita cosi:
+
+\begin{itemize}
+	\item Sistema di controllo nello stato iniziale $q_0$
+	\item Input $Z$ contenuto \textbf{nel primo nastro}
+	\item La testina del primo nastro sulla prima casella dell'input
+	\item Tutti gli altri nastri contengono solo $\square$.
+\end{itemize}
+%
+All'arresto della macchina, l'output viene estratto dal primo nastro. \it Ovviamente queste sono tutte convenzioni, non ci sarebbero implicazioni sulla potenza di calcolo se questi dettagli cambiassero.\rm
+
+\subsection{\textit{k}-istruzioni}
+$k>0$.
+Una $k$-istruzione è una $k$-upla
+
+
+\newpage
+\section{Simulazione con un solo nastro}
+Tutto ciò che fa una macchina di Turing a più nastri è simulabile con un solo nastro (in un trade-off nel numero di azioni da eseguire).
+
+\paragraph{L'idea}
+Rappresentare su un singolo nastro:
+\begin{itemize}
+	\item il contenuto di tutti i nastri, ponendoli in sequenza in maniera opportuna;
+	\item la posizione di ciascuna testina;
+	\item lo stato corrente della macchina simulata.
+\end{itemize}
+%
+Questo intrudce costi aggiuntivi in termini temporali, ma non cambia la classe delle funzioni calcolabili.
+
+\subsection{Simboli aggiuntivi per la simulazione}
+
+Indicheremo con $\mathfrak{M}$ una $k$-Macchina di Turing, con $\mathfrak{T}$ la macchina simulante, con $t^\rhd$ i simboli detti \textbf{head-marker}, un separatore \#, e...
+
+
+\subsection{Stati della macchina simulante}
+
+$\mathfrak{T}$ usa due tipi di stati.
+
+\paragraph{Stati semplici} Usati per fasi ausiliarie della simulazione, come inizializzazione e terminazione della codifica.
+
+\paragraph{Stati composti} Servono per la simulazione vera e propria di un passo di $\mathfrak{M}$.
+Useremo quindi stati nella forma $(q, U)$ e $(p, V, W)$. Questi sono i \textbf{nomi} degli stati, non coppie o terne.
+
+\begin{itemize}
+	\item Gli stati del tipo $(q, U)$: $q$ è un simbolo di $\mathfrak{M}$, mentre $U$ memorizza i simboli già letti dalle testine durante la scansione da sinistra verso destra.
+	
+	\item Gli stati del tipo $(p, V, W)$: $p$ è il nuovo stato da assumere, $V$ memorizza le operazioni ancora da simulare, e $W$ è una stringa di controllo usata per simulare la singola operazione corrente.
+\end{itemize}
+
+Ad esempio, lo stato $(q,\varepsilon)$ indica che $\mathfrak{T}$ sta simulando lo stato $q$ di $\mathfrak{M}$, e non ha ancora letto alcun head-marker.
+
+\subsection{Codifica di una \textit{k}-configurazione}
+Sia 
+
+$$
+\gamma = ...
+$$
+%
+una $k$-configurazione di $\mathfrak{M}$. La configurazione corrispondente di $\mathfrak{T}$ è data da
