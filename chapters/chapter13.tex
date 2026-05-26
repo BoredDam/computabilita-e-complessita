@@ -93,10 +93,21 @@ $$
 Se $M_1$ è riducibile a $M_2$, ogni procedura di decisione per $M_2$ da luogo ad una procedura di decisione per $M_1$, per cui, se $M_1$ è indecidibile, anche $M_2$ dovrà essere indecidibile. Il teorema $s-m-n$ serve proprio a ridurre un problema a un altro.
 
 \subsection{Indecidibilità di $\phi_x = \underline0$}
-
-Desideriamo che
+ $\phi_x = \underline0$ è indecidibile.
+ 
+ \paragraph{Dimostrazione}
+ Definiamo $f$ come 
+ 
+ $$
+ f(x,y) = \begin{cases}
+ 0 &\text{se $x \in W_x$}\\
+ \uparrow &\text{se $x \notin W_x$}
+ \end{cases}
+ $$
+ %
+ Usiamo il teorema $s-m-n$ imponendo $x$ come prametro. $g_x(y) \simeq f(x,y)$. $g_x = \underline0 \Leftrightarrow x \in W_x$. Per la tesi di Church, $f$ è calcolabile, e quindi esiste una funzione calcolabile $k(x)$ tale che $f(x,y) \simeq \phi_{k(x)}(y)$, come $\phi_{k(x)} = g_x(y)$.
+ 
 $$
 x \in W_x \Leftrightarrow \phi_{k(x)} = \underline0
 $$
 
-Con

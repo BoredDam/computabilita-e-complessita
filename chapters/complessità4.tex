@@ -1,0 +1,73 @@
+\chapter{Caratterizzazione della classe NP}
+
+
+
+\section{Rappresentazione di una relazione}
+
+Un linguaggio $\mathcal{L}$ rappresenta una data relazione $\rho$, se:
+
+$$
+\mathcal L = \{X / Y : (X,Y) \in \rho\}
+$$
+con $/$ come \textbf{simbolo separatore, non divisione}. Questo separatore non è in $\sigma_\rho$,e  permette di codificare la coppia di stringhe come una singola stringa.
+
+\subsection{Relazione verificabile in tempo deterministico polinomiale}
+Una relazione $\rho$ è \textbf{verificabile in tempo deterministico polinomiale} se esiste un linguaggio $\mathcal L$ in $P$, cioè riconoscibile in tempo deterministico polinomiale, che rappresenta $\rho$. In altri termini, se esiste una DTM tale che, ricevuta una coppia codificata $X/Y$ decide in tempo polinomiale se 
+
+$$
+(X,Y) \in \rho
+$$
+%
+questa macchina è detta \textbf{verificatore deterministico polinomiale} per $p$. Fissata l'istanza $X$, una stringa $Y$ viene proposta come \textbf{certificato}. \textbf{Il verificatore non deve trovare $Y$}, ma solo verificare in tempo polinomiale se $(X, Y) \in \rho$.
+
+\paragraph{Crittografia}
+La fattorizzazione è un problema difficile da risolvere, ma facile da verificare, rendendola ottimale per la crittografia. La fattorizzazione non è un problema di $NP$-hard, in quanto non soddisfa uno dei criteri. 
+
+\subsection{Bilanciamento polinomiale}
+Diremo che una relazione $\rho$ è \textbf{polinomialmente bilanciata} se esiste una funzione polinomiale $p$ tale che, $\forall (X,Y) \in \rho$ 
+
+$$
+|X/Y| \leq p
+$$
+
+\section{Caratterizzazione di NP}
+Sia $\mathcal L$ un linguaggio. $\mathcal L \in NP$ se e solo se esiste una relazione $\rho$ tale che
+\begin{enumerate}
+	\item $\rho$ verificabile in tempo deterministico polinomiale
+	\item $\rho$ è polinomialmente bilanciata
+	\item $\forall X$, $X \in \mathcal L \Leftrightarrow \exists Y (X,Y) \in \rho$ (verifica).
+\end{enumerate}
+
+\newpage
+\section{Tre nozioni fondamentali su grafi}
+Tratteremo solo grafi finiti, in quanto non ha senso parlare di complessità su grafi infiniti.
+\begin{itemize}
+	\item \textbf{Clique}: insieme di vertici tutti mutuamente adiacenti. 
+	\item \textbf{Insieme indipendente}: un insieme di vertici due a due non adiacenti
+	\item \textbf{Vertex cover}: un insieme di nodi che intercetta tutti gli archi
+\end{itemize}
+%
+queste notizioni danno origine a tre linguaggi decisionali:
+
+$$
+\mathcal{L}_{\textit{Clique}},\quad
+\mathcal{L}_{\textit{IndipendentSet}},\quad 
+\mathcal{L}_{\textit{VertexCover}}
+$$
+
+\subsection{Clique}
+Una $k$-clique è un insieme $C$ con $|C| = k$ vertici tutti adiacenti tra loro. 
+
+$$
+\mathcal{L}_{\textit{Clique}} = \{(G, k) : \exists C, \ |C| \geq k\}
+$$
+
+\section{NP-hardness}
+Un linguaggio $\mathcal L$ è NP-hard se per ogni linguaggio $\mathcal L' \in NP$ può essere ridotto a $\mathcal L$ in tempo polinomiale.
+
+$$
+\mathcal L' \leq_p \mathcal L
+$$
+
+Un linguaggio NP-hard che è anche in NP, è detto NP-completo.
+

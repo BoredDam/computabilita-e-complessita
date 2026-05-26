@@ -19,3 +19,61 @@ $$
 P \subseteq NP,
 $$
 inoltre, se $\mathcal{L} \in NP$, allora $\mathcal L$ è decidibile.
+
+\section{Sull'output}
+
+\subsection{Lunghezza dell'output}
+
+La lunghezza dell'output è sempre minore o uguale alla lunghezza dell'input + lunghezza della computazione + 1.
+
+\subsection{Output prodotto in tempo \textit{n}}
+\paragraph{Dimostrazione}
+Supponiamo $(X,Y) \in \sigma(\mathfrak{M})$
+
+\subsection{Output prodotto in tempo \textit{t}}
+
+\section{Chiusura per composizione}
+
+Siano $f$ e $g$ funzioni calcolabili in tempo polinomiale.
+
+$$
+f \circ g, \qquad f(g(x))
+$$
+%
+è calcolabile in tempo polinomiale.
+La composizione di funzioni computabili in tempo polinomiale, è computabile in tempo polinomiale.
+
+\paragraph{Dimostrazione}
+Siamo $\mathfrak{M}_f, \, \mathfrak{M}_g$ le macchine di Turing che calcolano rispettivamente $f$ e $g$
+\begin{enumerate}
+	\item Si copia l'input dal primo al secondo nastro
+	\item Si simula $\mathfrak{M}_g$ sul secondo nastro
+	\item Se la simulazione termina, si copia l'output sul primo nastro
+	\item Si simula $\mathfrak{M}_f$
+\end{enumerate}
+%
+Se anche la seconda simulazione termina, l'output è $f(g(X))$. Osserviamo che se la funzione composta termina, allora $X \in Dom(g)$ e $g(X) \in Dom(f)$, quindi questa macchina di Turing calcola effettivamente la composizione. 
+
+Il tempo polinomiale viene dimostrato nel seguente modo: denotiamo due tempi di computazione sotto forma di polinomi $p_f, \, p_g$. Senza perdere di generalità, possiamo supporre $p_f$ sia un polinomio semplice (crescente), in quanto è sempre possibile maggiorare con un polinomio semplice. Per input $X$:
+\begin{enumerate}
+	\item La copia iniziale di $X$ richiede tempo lineare in $|X|$
+	\item La simulazione di $\mathfrak{M}_g$ richiede al più tempo $p_g(|X|)$
+	\item Per il teorema sulla lunghezza dell'output, 
+	$$
+	|g(X)| \leq |X| + p_g(|X|) + 1,
+	$$
+	quindi la fase di copia di $g(X)$ dal secondo al primo nastro richiede tempo polinomiale, al più $|X| + p_g(|X|) + 1$. 
+	\item La simulazione di $\mathfrak{M}_f$ richiede tempo al più $p_f(|X| + p_g(|X|) + 1)$
+\end{enumerate}
+%
+Il tempo complessivo è quindi limitato dal polinomio
+
+$$
+q(|X|) + p_g(|X|) +r(|X| + p_g(|X|) + 1) + p_f(|X| + p_g(|X|) + 1)
+$$
+%
+la computazione della composizione di funzioni computabili in tempo polinomiale, avviene in tempo polinomiale.
+Usando il \textbf{Teorema di simulazione di macchine di turing multinastro}, il tempo rimane polinomiale.
+
+
+
