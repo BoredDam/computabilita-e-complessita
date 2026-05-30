@@ -1,0 +1,47 @@
+\chapter{3-SAT e Teorema di Cook}
+
+\section{Soddisfacibilità, letterali, clausole}
+
+Fissiamo un insieme numerabile $P$ di \textbf{lettere proposizionali}, o \textbf{atomi}.
+
+$$
+P_0, P_1, P_2, \dots
+$$
+%
+e il simbolo di negazione $\lnot$. Un letterale, è un atomo $P_i$ o la sua negazione $\lnot P_i$. Definiamo il letterale complementare come
+
+
+Una \textbf{clausola} è un insieme finito di letterali, anche vuoto. Essa corrisponde alla disgiunzione dei suoi letterali.
+Un \textbf{insieme di clausole} è un insieme finito di clasucole, anche vuoto. Esso corrisponde alla congiunzione delle sulle sue clausole 
+
+\paragraph{Clausola vuota e insieme di clausole vuoto}
+Indichiamo la clausola vuota con $\bot$, mentre l'insieme vuoto di clausole con $\top$. Senza questa notazione, l'insieme vuoto non sarebbe distinguibile tra clausola vuota o insieme di clausole vuoto. La clausola vuota è sempre falsa, mentre l'inseiem vuoto di clausole è sempre soddisfatto.
+
+\subsection{Assegnamento}
+
+È una funzione $v$ che associa ad ogni lettera proposizionale (atomo) un valore di verità, ossia
+
+$$
+v: \{P_0, P_1, P_2, \dots\} \to \{True, False\}
+$$
+%
+Sia $\ell$ un letterale, indichiamo con $(\ell)^v$ il suo \textbf{valore di verità} rispetto all'assegnamento $v$. Quindi $(P_i)^v = v(P_i)$ sono equivalenti.
+
+\paragraph{Osservazione sulle probabilità di soddisfacibilità} Una clausola grande è di più probabile soddisfacibilità, per la disgiunzione tra gli atomi. Al contrario, un insieme di clausole più piccolo favorisce la soddisfacibilità, a causa della congiunzione tra le clausole.
+
+
+\section{Il problema SAT}
+Input: un insieme finito di $S$ clausole. Domanda: esiste un assegnamento $v$ sugli atomi $atmos(S)$ che rende vere tutte le clausole di $S$? Indichiamo con $SAT$ la collezione di tutti gli insiemi soddisfacibili di clausole.
+
+\subsection{Codifica del problema SAT}
+
+Usiamo l'alfabeto di codifica 
+
+$$
+\Sigma_{SAT} = \{A,B,/,\#,1 \}
+$$
+
+
+\section{Teorema di Cook-Levin}
+
+Il linguaggio $\mathscr{L}_{SAT}$ è NP-completo. Lo dimostriamo verificando l'appartenenza in NP e l'NP-hardness.-
