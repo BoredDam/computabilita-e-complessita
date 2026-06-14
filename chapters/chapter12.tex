@@ -29,13 +29,42 @@
 	
 	\paragraph{Dimostrazione formale della calcolabilità}
 	
-	\section{Esistenza di funzione \textit{totale} calcolabile non primitiva ricorsiva}
-	Esiste una funzione \textit{totale} calcolabile non primitiva ricorsiva
+	\section{Predicati di verifica della fermata limitata}
+	I seguenti predicati sono decidibili:
+	\begin{itemize}
+		\item $S_n(e, \vec{x}, y, t) \cong \text{"$P_e(\vec{x})\downarrow y$ in al più $t$ passi."}$
+		\item $T_n(e, \vec{x}, y, t) \cong \text{"$P_e(\vec{x})\downarrow$ in al più $t$ passi."}$
+	\end{itemize}
+	
+	\subsection{Teorema della forma normale di Kleene}
+	Esistono una funzione calcolabile $U(x)$, e , per ogni $n \geq 1$, un predicato decidibile $T_n(e, \vec{x}, z)$ tali che:
+	\begin{enumerate}
+		\item $\phi_e^{(n)}(\vec{x})\downarrow$ se e solo se $\exists z T_n(e, \vec{x}, z) = 1$
+		\item $\phi_e^{(n)}(\vec{x}) = U(\mu zT_n(e, \vec{x}, z))$
+	\end{enumerate}
+	%
+	Un risultato molto interessante di questo teorema, è legato alle funzioni $S_n(e, \vec{x}, y, t), \, T_n(e, \vec{x}, z)$, che sono $\mathcal{PR}$. Il teorema della forma normale dice quindi che ogni funzione calcolabile può esser eottenuta mediante \textbf{al più una sola} applciazione dell'operatore di minimalizzazione $\mu$.
+	
+	
+	\subsection{Definizione per casi \textit{con funzioni parziali!}}
+	Questa possibilità di simulare le funzioni fino al $t$-esimo passo, permette di gestire anche definizioni per casi che includono funzioni parziali. Invece di usare la sommatoria di $f(\vec{x}) \cdot c_M(\vec{x})$, si calcolano in parallelo tutte le funzioni, un passo alla volta. Quando la funzione a cui è associato il predicato soddisfatto termina, allora termina l'intera funzione definita per casi.
+	
+	\section{Indecidibilità di "\textit{$\phi_x$ è totale}"}
+	Il problema ``$\phi_x$ è totale'' è indecidibile. 
 	\paragraph{Dimostrazione}
+	Sia $M(x) := \text{``$\phi_x$ è totale''}$. Se $M(x)$ fosse decidibile, allora ponen
 	
-	
-	
-	
+	\begin{equation}
+	f(x) := \begin{cases}
+	\psi_U(x,x) + 1 & \text{se ``$\phi_x$ è totale''}\\
+	0 & \text{se ``$\phi_x$ non è totale''}\\
+	\end{cases}
+	\end{equation}
+	%
+	la funzione $f$ sarebbe calcolabile, pertanto esiste $e \in \mathbb{N}$ tale che $f= \phi_e$. $f$ è totale, quindi $\phi_e$ è totale, dunque:
+	$$
+	\phi_e(e) = f(e) = \psi_U(e,e) + 1 = \phi_e(e) +1
+	$$
 	\section{Operazioni effettiva su funzioni calcolabili}
 	Ci chiediamo se sia possibile manipolare in maniera effettiva funzioni o insiemi infiniti (ricorsivamente enumerabili\footnote{Gli insiemi ricorsivamente enumerabili sono collezioni di elementi (solitamente numeri naturali) per i quali esiste un algoritmo capace di elencarne i membri o di riconoscere quelli validi in tempo finito}): in alcuni casi, questo è possibile, tramite applicazione del teorema di parametrizzazione!
 	
